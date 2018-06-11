@@ -11,7 +11,7 @@
 
 % -- att/3 returns the value of a substructure
 % att([a:b,c:d],c,X), returns X=d.
-att([F:U|_], F, U1):- 
+att([F:U|_], F, U1):-
 	!,
 	U = U1.	% if the attribute is present, values must match
 
@@ -22,18 +22,18 @@ att([], _F, _U).	% success if the attribute is absent
 
 
 % ------------------------------------------------------
-% Don't change anything below this line... unless you 
+% Don't change anything below this line... unless you
 % know what you are doing
 % ------------------------------------------------------
 
 % get_lines makes the conversion between strings and list
-% 
+%
 get_line(Phrase) :-
-        collect_wd(String), 
+        collect_wd(String),
         str2wlist(Phrase, String).
 
 collect_wd([C|R]) :-
-        get0(C), not(member(C, [-1, 10, 13, 27])), !, 
+        get0(C), not(member(C, [-1, 10, 13, 27])), !,
         collect_wd(R).
 collect_wd([]).
 
@@ -55,16 +55,16 @@ print_tree(_,_,StructPhrase) :-
 	!,
 	print_phr([' : ',LibPhrase]).
 print_tree(Indent,Prefixe,StructPhrase) :-
-	%StructPhrase =.. [LibPhrase,AttrPhrase|SousStruct],
-	%nl,print_phr([Prefixe,LibPhrase,AttrPhrase]),
+	% StructPhrase =.. [LibPhrase,AttrPhrase|SousStruct],
+	% nl,print_phr([Prefixe,LibPhrase,AttrPhrase]),
 	StructPhrase =.. [LibPhrase|SousStruct],
-	nl,print_phr([Prefixe,LibPhrase]),
+	nl, print_phr([Prefixe,LibPhrase]),
 	print_node(Indent,SousStruct).
 
 print_node(_,[]).
 print_node(Indent,[SP]) :-
 	% c'est le dernier fils, on ne dessine plus
-	% la branche parente                        
+	% la branche parente
 	!,
 	atom_concat(Indent,'   ',NewIndent),
 	atom_concat(Indent,'  |__',IndentLoc),
@@ -79,5 +79,3 @@ print_phr([]).
 print_phr([S|Sl]) :-
 	write(S),
 	print_phr(Sl).
-
-

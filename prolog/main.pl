@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------*/
 /* Telecom Paristech - J-L. Dessalles 2018                       */
-/* Symbolic Natural Language Processing                 */
-/*            http://teaching.dessalles.fr/SNLP                   */
+/* Symbolic Natural Language Processing            					     */
+/*            http://teaching.dessalles.fr/SNLP                  */
 /*---------------------------------------------------------------*/
 
 
@@ -46,9 +46,11 @@ dcg_parse(Cat, L) :-		% Cat is the phrase type to be recognized (default: s)
 	Phrase,		% executing DCG, for instance 	s(FS,Pred,Tree,L,[]),
 	nl, write('Syntactically correct'),nl,
 
+	parse_reference(Tree),
+
 	%%%%%%%%%%%%%%% Printing results	%%%%%%%%%%%%%%
 	write(FS), nl,
-	print_tree(Tree),	% comment if tree display is annoying
+	print_tree(Tree),	 % comment if tree display is annoying
 	execute(Pred),	%%%%%%% uncomment to trigger top execution
 	writeln(Pred),
 	write('this sentence makes sense'),nl,
@@ -56,6 +58,23 @@ dcg_parse(Cat, L) :-		% Cat is the phrase type to be recognized (default: s)
 	go.
 dcg_parse(_) :-
 	go.
+
+parse_reference(Tree) :-
+	Tree =.. [Terminal],
+	!,
+	write(Terminal).
+parse_reference(Tree) :-
+	Tree =.. [Head|SubTree],
+	write(Head), write(" "),
+	parse_reference_node(SubTree).
+
+parse_reference_node([]).
+parse_reference_node([Node]) :-
+	!,
+	parse_reference(Node).
+parse_reference_node([H|Node]) :-
+	parse_reference(H),
+	parse_reference_node(Node).
 
 
 

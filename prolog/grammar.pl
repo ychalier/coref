@@ -120,8 +120,8 @@ det([gloss:the, num:plur], det(the)) --> [the].
 det([gloss:a,   num:sing], det(a))   --> [a].
 det([gloss:all, num:plur], det(all)) --> [all].
 
-n([gloss:child, num:sing], child(_), n(child)) --> [child].
-n([gloss:child, num:plur], child(_), n(child)) --> [children].
+% n([gloss:child, num:sing], child(_), n(child)) --> [child].
+% n([gloss:child, num:plur], child(_), n(child)) --> [children].
 n([gloss:game,  num:sing], game(_),  n(game))  --> [game].
 n([gloss:game,  num:plur], game(_),  n(game))  --> [games].
 n([gloss:girl,  num:sing], girl(_),  n(girl))  --> [girl].
@@ -187,9 +187,9 @@ adj([gloss:big],   big(_),   adj(big))	 --> [big].
 adj([gloss:happy], happy(_), adj(happy)) --> [happy].
 adj([gloss:quiet], quiet(_), adj(quiet)) --> [quiet].
 
-adj([gloss:white], white(_), adj(white)) --> [white].
-adj([gloss:black], black(_), adj(black)) --> [black].
-n([gloss:right, num:sing], right(_, _), n(right)) --> [right].
+% adj([gloss:white], white(_), adj(white)) --> [white].
+% adj([gloss:black], black(_), adj(black)) --> [black].
+% n([gloss:right, num:sing], right(_, _), n(right)) --> [right].
 
 
 % prep
