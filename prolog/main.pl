@@ -32,14 +32,23 @@ go(Cat, Msg) :-		% analyse category 'Cat' phrase (eg. s, dp, np)
 	get_line(Phrase),
 	Phrase \== [''],
 	!,
-	dcg_parse(Cat, Phrase).	% start DCG parser
+	dcg_parse(Cat, Phrase, Nouns, Pronoun).	% start DCG parser
 go(_, _).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % parsing                                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-dcg_parse(Cat, L) :-		% Cat is the phrase type to be recognized (default: s)
+dcg_parse(Cat, L, [NewNoun|OldNouns], Pronouns) :-		% Cat is the phrase type to be recognized (default: s)
+
+	Phrase =.. [n, FS, Pred, Tree, L, []],	% adding arguments to Phrase
+	NewNoun =.. [n, FS],
+	!,
+
+dcg_parse(Cat, L, [NewNoun|OldNouns], Pronouns) :-
+
+
+dcg_parse(Cat, L, Nouns, Pronouns) :-		% Cat is the phrase type to be recognized (default: s)
 
 	%%%%%%%%%%%%%%% running DCG parser  %%%%%%%%%%%%%%
 	Phrase =.. [Cat, FS, Pred, Tree, L, []],	% adding arguments to Phrase
@@ -61,17 +70,23 @@ dcg_parse(_) :-
 
 parse_reference(Tree) :-
 	Tree =.. [Terminal],
-	!,
-	write(Terminal).
+	!.
+%	write(Terminal).
 parse_reference(Tree) :-
 	Tree =.. [Head|SubTree],
-	write(Head), write(" "),
+
 	parse_reference_node(SubTree).
 
 parse_reference_node([]).
 parse_reference_node([Node]) :-
 	!,
 	parse_reference(Node).
+parse_reference_node([H|Node]) :-
+	H =.. [pronoun, |[X]],
+	nl, write(X), nl,
+	% write(Head),
+	parse_reference(H),
+	parse_reference_node(Node).
 parse_reference_node([H|Node]) :-
 	parse_reference(H),
 	parse_reference_node(Node).

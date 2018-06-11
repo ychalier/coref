@@ -1,0 +1,9 @@
+s --> np, vp
+np --> n
+np --> det, n
+np --> pn, n
+np --> pn
+vp --> v, np
+vp --> v, sub
+sub --> p, n, v
+vp --> vp, p, vp
