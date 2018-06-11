@@ -85,6 +85,12 @@ dp(FN,PNP,TDP) --> det(FDET,TDET), np(FN,PNP,TN), { % 'the girl'
 		att(FN, num, Num),
 		TDP = dp(TDET,TN) }.
 
+
+dp(FN,PNP,TDP) --> pronoun(FPR,TPR), np(FN,PNP,TN), { % 'his sister'
+		att(FN, num, Num),
+		TDP = dp(TPR,TN) }.
+
+
 dp(FN,PNP,TDP) --> np(FN,PNP,TN), {	% 'girls'
 		att(FN, num, plur),
 		TDP = dp(TN) }.
@@ -112,6 +118,7 @@ cp(FC, PS,TCP) --> c(FC, TC), s(_FS, PS,TS), {
 		TCP = cp(TC, TS) }.
 
 
+
 % -------
 % Lexicon
 % -------
@@ -126,7 +133,8 @@ n([gloss:game,  num:sing], game(_),  n(game))  --> [game].
 n([gloss:game,  num:plur], game(_),  n(game))  --> [games].
 n([gloss:girl,  num:sing], girl(_),  n(girl))  --> [girl].
 n([gloss:girl,  num:plur], girl(_),  n(girl))  --> [girls].
-n([gloss:boy,   num:sing], boy(_),   n(boy))   --> [boy].
+n([gloss:boy,   num:sing, gender:male], boy(_),   n(boy))   --> [boy].
+n([gloss:female,   num:sing, gender:female], sister(_),   n(sister))   --> [sister].
 n([gloss:boy,   num:plur], boy(_),   n(boy))   --> [boys].
 n([gloss:room,  num:sing], room(_),  n(room))  --> [room].
 n([gloss:house, num:plur], house(_), n(house)) --> [house].
@@ -191,6 +199,9 @@ adj([gloss:quiet], quiet(_), adj(quiet)) --> [quiet].
 % adj([gloss:black], black(_), adj(black)) --> [black].
 % n([gloss:right, num:sing], right(_, _), n(right)) --> [right].
 
+% pronouns
+pronoun([gloss:his, num:sing, pers:3, gender:male], pronoun(his)) --> ['his'].
+pronoun([gloss:his, num:sing, pers:3, gender:female], pronoun(her)) --> ['her'].
 
 % prep
 p([gloss:on],   p(on))	   --> [on].

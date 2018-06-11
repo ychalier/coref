@@ -15,6 +15,7 @@ child('John').
 child('Pat').
 room('my_room').
 daughter('Ann', 'Lisa').
+sister('Ann').
 
 animate(X) :- girl(X).
 animate(X) :- boy(X).
