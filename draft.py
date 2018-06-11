@@ -216,6 +216,6 @@ parser = Parser('en.gram', 'en.lexic')
 # print(parser.lexicon)
 # print(parser.dictionnary)
 
-parser.solve_coreference("the boy likes his sister and protects her")
+parser.solve_coreference("the girl likes her brother and protects him")
 parser.solve_coreference("he said that John was_coming")
 parser.solve_coreference("his sister said that John was_coming")

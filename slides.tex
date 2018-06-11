@@ -1,0 +1,102 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{sansmathaccent}
+\pdfmapfile{+sansmathaccent.map}
+\usepackage{tikz}
+
+\usetheme{Singapore}
+
+\title{Co-reference resolution}
+\author{Yohan Chalier}\institute{Symbolic Natural Language Processing (SD213)}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{What is co-reference?}
+
+\emph{Co-reference} occurs when two or more expressions refers to the same referent. Usually, one expression is in a full form (the \emph{antecedent}) and the other one in a abbreviated form (a \emph{proform}).
+
+~\par
+
+For example:
+
+\textit{The \textbf{music} was so loud that \textbf{it} couldn't be enjoyed.}
+
+~\par
+
+Co-reference resolution is needed to derive a correct interpretation of a text.
+
+\end{frame}
+
+\begin{frame}{The problem of co-reference resolution}
+
+\begin{block}{Naive algorithm}
+Look for the nearest preceding individual that is compatible with the referring expression.
+\end{block}
+
+~\par
+
+It solves sentences like this:
+
+{\em \hspace{\parindent} The girl\textsubscript{1} likes her\textsubscript{1} brother\textsubscript{2} and protects him\textsubscript{2}.}
+
+~\par
+
+But it fails to differentiate those sentences:
+
+{\em \hspace{\parindent} He\textsubscript{?} said that John\textsubscript{?} was coming.}
+
+{\em \hspace{\parindent} His\textsubscript{1} sister said that John\textsubscript{1} was coming.}
+
+\end{frame}
+
+\begin{frame}{Domination and c-command}
+
+\begin{block}{Domination}
+Node $N_1$ dominates node $N_2$ if $N_1$ is above $N_2$ in the tree and one can trace a path from $N_1$ to $N_2$ moving only downwards in the tree (never upwards).
+\end{block}
+
+\begin{block}{c-command}
+Node $N_1$ c-commands node $N_2$ if
+\begin{itemize}
+\item $N_1$ does not dominate $N_2$
+\item $N_2$ does not dominate $N_1$
+\item The first (i.e. the lowest) branching node that dominates $N_1$ also dominates $N_2$
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Domination and c-command}
+
+\begin{center}
+\begin{tikzpicture}
+\node{M}
+	child {node {A}}
+	child {node {B}
+		child {node {C} child {node {E}}}
+		child {node {D}
+			child {node {F}}
+			child {node {G}}
+		}
+	};
+\end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Co-reference and c-command}
+
+It was hypothesized that one restriction between proform and antecedent is that {\bfseries the proform cannot appear in a position where it \emph{c-commands} its antecedent}.
+
+~\par
+
+This is not trivial: Bouchard, Denis. (2010). \textit{Une explication cognitive des effets attribués à la c-commande dans les contraintes sur la coréférence}. Corela. 10.4000/corela.965.
+
+\end{frame}
+
+
+\end{document}

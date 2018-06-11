@@ -1,5 +1,5 @@
-n --> boy[gender:male;num:sing], sister[gender:female;num:sing], John[gender:male;num:sing]
+n --> boy[gender:male;num:sing], sister[gender:female;num:sing], John[gender:male;num:sing], girl[gender:female;num:sing], brother[gender:male]
 det --> the
-pn --> his[gender:male;num:sing], her[gender:female;num:sing], he[gender:male]
+pn --> his[gender:male;num:sing], her[gender:female;num:sing], he[gender:male], him[gender:male]
 v --> likes, protects, said, was_coming
 p --> and, that
