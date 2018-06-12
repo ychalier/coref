@@ -6,3 +6,4 @@ venv/
 *.snm
 *.synctex.gz
 *.toc
+*.vrb
