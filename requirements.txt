@@ -1,2 +1,0 @@
-pyStatParser==0.0.1
-six==1.11.0
