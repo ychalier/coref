@@ -3,6 +3,7 @@
 \usepackage{sansmathaccent}
 \pdfmapfile{+sansmathaccent.map}
 \usepackage{tikz}
+\usepackage{verbatim}
 
 \usetheme{Singapore}
 
@@ -14,6 +15,8 @@
 \begin{frame}
 \titlepage
 \end{frame}
+
+\section{Problem positioning}
 
 \begin{frame}{What is co-reference?}
 
@@ -98,5 +101,138 @@ This is not trivial: Bouchard, Denis. (2010). \textit{Une explication cognitive 
 
 \end{frame}
 
+\begin{frame}{When John Comes Marching Home}
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\emph{he} said that \emph{john} was coming
+\end{column}
+\begin{column}{0.7\textwidth}
+\begin{center}
+\begin{tikzpicture}
+\node{S}
+	child {node {NP}
+		child {node {he}}		
+		}
+	child {node {VP}
+		child {node {said}}
+		child {node {$\overline{\text{V}}$}
+			child {node {that}}
+			child {node {NP}
+				child {node {John}}
+			}
+			child {node {VP}
+				child {node {\ldots}}			
+			}
+		}
+	};
+\end{tikzpicture}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{When John Comes Marching Home}
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\emph{his} mother said that \emph{john} was coming
+\end{column}
+\begin{column}{0.7\textwidth}
+\begin{center}
+\begin{tikzpicture}
+\node{S}
+	child {node[left=1cm] {NP}
+		child {node {his}}
+		child {node {mother}}
+	}
+	child {node {VP}
+		child {node {said}}
+		child {node {$\overline{\text{V}}$}
+			child {node {that}}
+			child {node {NP}
+				child {node {John}}
+			}
+			child {node {VP}
+				child {node {\ldots}}			
+			}
+		}
+	};
+\end{tikzpicture}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+\section{Implementation}
+
+\begin{frame}{Current implementation}
+
+A Python script that contains:
+
+\begin{itemize}
+\item a small grammar and lexicon
+\item a very basic top-down parser in a class \texttt{Parser}
+\item a \texttt{Node} class to represent a syntax tree
+\end{itemize}
+
+\begin{block}{Co-reference resolution}
+For each word recognized as a referring expression (for now, only pronouns), a method of the \texttt{Parser} finds a compatible word (\emph{features agreement}), and if the proform does not c-command that word, it links them both.
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{See it in action (1/2)}
+
+\begin{verbatim}
+Parsing: he said that John was_coming
+
+ |_ s
+   |_ np
+     |_ pn : he
+   |_ vp
+     |_ v : said
+     |_ sub
+       |_ p : that
+       |_ n : John
+       |_ v : was_coming
+
+he_0 said that John was_coming
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{See it in action (2/2)}
+
+\begin{verbatim}
+Parsing: his sister said that John was_coming
+his_0 sister said that John_0 was_coming
+
+Parsing: the girl likes her brother and protects him
+the girl_0 likes her_0 brother_1 and protects him_1
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}{Difficulties and perspectives}
+
+\begin{itemize}
+\item Parser improvement (if time, use CKY)
+\item Use more features to check compatibility (now just 2)
+\item Perform more tests to compute a precision score
+\item Ultimately, try parsing several sentences to find references across sentences
+\end{itemize}
+
+~\par
+
+The script is available on GitHub:
+
+\url{https://github.com/ychalier/coref/}
+
+\end{frame}
+
+\begin{frame}
+\begin{center}
+Thank you for your attention.
+\end{center}
+\end{frame}
 
 \end{document}

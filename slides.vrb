@@ -1,0 +1,10 @@
+\frametitle{See it in action (2/2)}
+
+\begin{verbatim}
+Parsing: his sister said that John was_coming
+his_0 sister said that John_0 was_coming
+
+Parsing: the girl likes her brother and protects him
+the girl_0 likes her_0 brother_1 and protects him_1
+\end{verbatim}
+
