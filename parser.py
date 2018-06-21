@@ -178,10 +178,10 @@ class Node:
         """
             Returns True if 'self' dominates 'other'
         """
-        if len(self.childs) == 0:
+        if len(self.childs) == 0:  # bottom of the tree, 'other' was not found
             return False
         for child in self.childs:
-            if child == other or child.dominates(other):
+            if child == other or child.dominates(other):  # recursion
                 return True
         return False
 
@@ -189,10 +189,13 @@ class Node:
         """
             Returns True if 'self' c-commands 'other'
         """
+
+        # first we make sure no one dominates the other
         if self.dominates(other) or other.dominates(self):
             return False
+
         parent = self.parent
-        while parent is not None:
+        while parent is not None:  # tree climbing
             if len(parent.childs) > 1 and parent.dominates(self):
                 return parent.dominates(other)
             parent = parent.parent

@@ -12,3 +12,5 @@ venv/
 *.ps
 *.lot
 *.lof
+*.bbl
+*.blg
