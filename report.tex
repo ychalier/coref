@@ -34,7 +34,7 @@
 
 \maketitle
 
-\section{Problem positioning}
+\section{Theoretical approach}
 
 Co-reference occurs when two or more expressions refers to the same referent. Usually, one expression is in a full form (the \emph{antecedent}) and the other one in a abbreviated form (a \emph{proform}). For example:
 \begin{sentence}
@@ -94,11 +94,17 @@ On the other hand, as shown in Figure \ref{fig:parse_tree_his_sister}, the first
 
 ~\par
 
-Finding a proof of Theorem \ref{thm:ccommand} is not trivial, and actually it has not been found at this day. This fact is just hypothesized. Some works try to interpret this with cognitive aspects \cite{bouchard2010explication}. The main issue with this rule is that the computational approach presents the result in a way it cannot be explained. Therefore people try to find other reasons to explain this phenomenon.
+Finding a proof of Theorem \ref{thm:ccommand} is not trivial, and actually it has not been found at this day. This condition about co-reference binding is just hypothesized. Some works try to interpret this with cognitive aspects \cite{bouchard2010explication}. The main issue with this theorem is that the computational approach presents the result in a way it cannot be explained. Therefore people try to find other reasons to explain this phenomenon.
 
 ~\par
 
-One hypothesis is the \emph{Novelty condition}: 
+One hypothesis to this condition is based on the syntax derivation process. In linguistic, to determine if a string of words is a grammatical (well-formed) sentence of a language, one can try to derive its structure from a set of lexical items, operations such as a Merge or a Move, and some constraints \cite{mueller2008derivation}.
+
+When a pronoun is found and needs to be bound to an antecedent, the binding is possible across only one merge. Beyond that, relation between nodes is considered too weak to be linked together.
+
+~\par
+
+Another hypothesis, based on cognitive motivations, is the \emph{Novelty condition}: 
 \begin{quote}
 An anaphorically dependent element cannot have more determinate reference than its antecedent. \cite{wasow1979anaphora}
 \end{quote}
@@ -202,7 +208,7 @@ Along the way, it produces the parse tree as an instance of the class \texttt{No
 
 \begin{figure}
 \centering
-\includegraphics[scale=1]{screenshot_parse_tree}
+\includegraphics[scale=.8]{screenshot_parse_tree}
 \caption{Screenshot of the outputted parse tree\label{fig:screenshot}}
 \end{figure}
 
